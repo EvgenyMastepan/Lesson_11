@@ -73,3 +73,19 @@ nameOfStudents.forEach({print($0)})
 let avgGrade = students.map{ $0.grade }.reduce(0, +) / Double(students.count)
 print("Средний балл - \(avgGrade)")
 
+/* Задание 2:
+ 1. Дан массив строк. Используя функции filter и count, подсчитайте, сколько слов имеют длину более 4 символов.
+ 2. Выведите результат. */
+
+let numberOfCharacter: Int = 4
+let brands = ["Audi", "BMW", "Mercedes-Benz", "Opel", "Porsche", "Volkswagen"]
+let shortBrands = brands.filter{ $0.count > numberOfCharacter }
+
+if !shortBrands.isEmpty {
+    print ("Слов имеющих длину более \(numberOfCharacter) символов: \(shortBrands.count) шт.")
+    shortBrands.forEach( {print ($0)} )
+} else { print("Слов, удовлетворяющих условию не обнаружено.") }
+
+
+
+
