@@ -127,6 +127,7 @@ func buildIndex(wordsIn: [String]) -> [Entry] {
         print("Ошибка. Пустой массив.")// для полной обработки ошибок сначала сделал опциональный return, но очевидно не стоит того.
         return []
     } else {
+        // Сначала сделал костыль "чтобы работало" из двумерного массива с двумя вложенными for in. Потом оптимизировал до текущего варианта с замыкающими. Очевидно, можно ещё красивее сделать.
         let returnedArray: [Entry] = sortedCharacters.map { (char: String) -> Entry in let assignedWords = uppercaseWords.filter { ($0.prefix(1) == char ) }
             return Entry(letter: char, words: assignedWords)
         }
