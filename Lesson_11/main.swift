@@ -118,11 +118,14 @@ struct Entry {
 }
 
 func buildIndex(wordsIn: [String]) -> [Entry] {
-    let words = wordsIn.filter { $0 != "" }
-    let uppercaseWords = words.map{$0.capitalized}
     var listOfEntry: [Entry] = []
-    let sortedCharacters = Array(Set(uppercaseWords.map{($0.first!)})).sorted()
     
+    let words = wordsIn.filter { $0 != "" } // Исключаем пустые строки.
+    let uppercaseWords = words.map{$0.capitalized} // Все слова с большой буквы.
+
+    let sortedCharacters = Array(Set(uppercaseWords.map { $0.prefix(1) } )).sorted() // Сортированные буквы
+    
+
     if words.isEmpty {
         print("Ошибка. Пустой массив.")
     } else {
