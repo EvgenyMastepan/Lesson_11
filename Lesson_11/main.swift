@@ -117,7 +117,8 @@ struct Entry {
     let words: [String]
 }
 
-func buildIndex(words: [String]) -> [Entry] {
+func buildIndex(wordsIn: [String]) -> [Entry] {
+    let words = wordsIn.filter { $0 != "" }
     let uppercaseWords = words.map{$0.capitalized}
     var listOfEntry: [Entry] = []
     let sortedCharacters = Array(Set(uppercaseWords.map{($0.first!)})).sorted()
@@ -129,7 +130,7 @@ func buildIndex(words: [String]) -> [Entry] {
             let tempChar = String(char)
             var tempWord: [String] = []
             for word in uppercaseWords {
-            // Пустые строки игнорируются. Слова начинающиеся с цифры обрабатываются.
+            // Пустые строки игнорируются. Слова начинающиеся с цифры и пробелы обрабатываются до уточнения ТЗ.
                 if tempChar == String(word.prefix(1)) {
                     tempWord.append(word)
                 }
@@ -141,6 +142,8 @@ func buildIndex(words: [String]) -> [Entry] {
     return listOfEntry
 }
 
-let words = ["ночь", "улица", "Фонарь", "аптека","бессмысленный", "И", "тусклый", "Свет", "живи", "Ещё", "хоть", "четверть", "Века", "всё", "будет", "так", "Исхода", "нет"]
+let emt:[String] = []
+let words = ["ночь", "улица", "Фонарь", "", "аптека","бессмысленный", "И", "тусклый", "Свет", "живи", "Ещё", "хоть", "четверть", "Века", "всё", "будет", "так", "Исхода", "нет"]
 
-buildIndex(words: words).forEach{print($0)}
+buildIndex(wordsIn: words).forEach{print($0)}
+buildIndex(wordsIn: emt).forEach{print($0)}
