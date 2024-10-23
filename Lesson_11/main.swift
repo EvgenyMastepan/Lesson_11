@@ -118,35 +118,24 @@ struct Entry {
 }
 
 func buildIndex(wordsIn: [String]) -> [Entry] {
-    var listOfEntry: [Entry] = []
     
-    let words = wordsIn.filter { $0 != "" } // Исключаем пустые строки.
+    let words = wordsIn.filter { $0 != "" }        // Исключаем пустые строки.
     let uppercaseWords = words.map{$0.capitalized} // Все слова с большой буквы.
-
-    let sortedCharacters = Array(Set(uppercaseWords.map { $0.prefix(1) } )).sorted() // Сортированные буквы
-    
+    let sortedCharacters = Array(Set( uppercaseWords.map { String($0.prefix(1)) } )).sorted() // Сортированные буквы
 
     if words.isEmpty {
-        print("Ошибка. Пустой массив.")
+        print("Ошибка. Пустой массив.")// для полной обработки ошибок сначала сделал опциональный return, но очевидно не стоит того.
+        return []
     } else {
-        for char in sortedCharacters {
-            let tempChar = String(char)
-            var tempWord: [String] = []
-            for word in uppercaseWords {
-            // Пустые строки игнорируются. Слова начинающиеся с цифры и пробелы обрабатываются до уточнения ТЗ.
-                if tempChar == String(word.prefix(1)) {
-                    tempWord.append(word)
-                }
-            }
-            let temp = Entry(letter: tempChar, words: tempWord)
-            listOfEntry.append(temp)
+        let returnedArray: [Entry] = sortedCharacters.map { (char: String) -> Entry in let assignedWords = uppercaseWords.filter { ($0.prefix(1) == char ) }
+            return Entry(letter: char, words: assignedWords)
         }
+        return returnedArray
     }
-    return listOfEntry
 }
 
-let emt:[String] = []
 let words = ["ночь", "улица", "Фонарь", "", "аптека","бессмысленный", "И", "тусклый", "Свет", "живи", "Ещё", "хоть", "четверть", "Века", "всё", "будет", "так", "Исхода", "нет"]
+let empty:[String] = []
 
 buildIndex(wordsIn: words).forEach{print($0)}
-buildIndex(wordsIn: emt).forEach{print($0)}
+buildIndex(wordsIn: empty).forEach{print($0)}
