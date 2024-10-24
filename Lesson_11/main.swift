@@ -128,9 +128,14 @@ func buildIndex(wordsIn: [String]) -> [Entry] {
         return []
     } else {
         // Сначала сделал костыль "чтобы работало" из двумерного массива с двумя вложенными for in. Потом оптимизировал до текущего варианта с замыкающими. Очевидно, можно ещё красивее сделать.
-        let returnedArray: [Entry] = sortedCharacters.map { (char: String) -> Entry in let assignedWords = uppercaseWords.filter { ($0.prefix(1) == char ) }
-            return Entry(letter: char, words: assignedWords)
-        }
+        let returnedArray = sortedCharacters.map { letter in
+                   let assignedWords = uppercaseWords.filter { ($0.prefix(1) == letter ) }
+                   return Entry(letter: letter, words: assignedWords)
+               }
+        
+//        let returnedArray: [Entry] = sortedCharacters.map { (char: String) -> Entry in let assignedWords = uppercaseWords.filter { ($0.prefix(1) == char ) }
+//            return Entry(letter: char, words: assignedWords)
+//        }
         return returnedArray
     }
 }
